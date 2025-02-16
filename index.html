@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <img class="mypic" src="Images/MyPhoto4.JPG" alt="My Photo">
+                <div class="name">ARYMAN SRIVASTAVA</div>
+            </div>
+        </header>
+        <div class="subheader-container">
+            <p class="subheader typing">Software Engineer</p>
+            <button class="cta-button">
+                <a href="connect.html" target="_blank" style="text-decoration: none; color: inherit;">
+                    Get in Touch
+                </a>
+            </button>
+        </div>
+    </div>
+    <div class="container3">
+        <div class="subheader-container">
+            <header>ABOUT ME</header>
+            <p class="subheader typing" style="white-space: normal; word-break: break-word; padding-left: 10%;">Hi, I'm a passionate Software Engineer who graduated in 2024, specializing in Artificial Intelligence and Machine Learning. I have experience in developing AI-driven solutions, machine learning models, and web applications. My focus is on building intelligent systems that enhance user experiences and drive innovation.</p>
+        </div>
+    </div>
+    <div class="container2">
+        <header>PROJECTS</header>
+        <div class="subheader-container">
+            <p class="subheader typing">Explore my latest work</p>
+            <button class="cta-button">
+                <a href="https://github.com/Aryman-Srivastava" target="_blank" style="text-decoration: none; color: inherit;">
+                    View Projects
+                </a>
+            </button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function typeEffect(element, speed) {
+                let text = element.innerHTML;
+                element.innerHTML = "";
+                let i = 0;
+                function type() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    }
+                }
+                type();
+            }
+    
+            let elements = document.querySelectorAll(".typing");
+            elements.forEach((el) => typeEffect(el, 100));
+        });
+    </script>
+</body>
+</html>
