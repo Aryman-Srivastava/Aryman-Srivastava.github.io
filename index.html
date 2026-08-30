@@ -1,65 +1,688 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="icon" type="image/png" href="Images/MyPhoto4.JPG">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryman Srivastava — Software Engineer</title>
+<meta name="description" content="Aryman Srivastava — Software Engineer at NatWest Group. AI agents, RAG pipelines, and backend systems that turn unstructured data into product.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231B1F23'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' fill='%23FFC94A' text-anchor='middle'%3EAS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFEDE6;
+    --paper-alt:#E5E2D8;
+    --panel:#22262B;
+    --ink:#1B1F23;
+    --slate:#5B6470;
+    --amber:#FFC94A;
+    --amber-deep:#E6A93B;
+    --teal:#0E7C66;
+    --line:#D8D5CB;
+    --line-dark:#3A3F45;
+    --max:1080px;
+    --serif:'Fraunces', ui-serif, Georgia, serif;
+    --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+
+  ::selection{ background:var(--amber); color:var(--ink); }
+
+  :focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+  }
+
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--teal);
+    box-shadow:0 0 0 0 rgba(14,124,102,.5);
+    animation:pulse 2.2s infinite;
+    flex:none;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(14,124,102,.45); }
+    70%{ box-shadow:0 0 0 8px rgba(14,124,102,0); }
+    100%{ box-shadow:0 0 0 0 rgba(14,124,102,0); }
+  }
+
+  h1,h2,h3{
+    font-family:var(--serif);
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- Nav ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(239,237,230,.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    max-width:var(--max); margin:0 auto;
+    gap:16px; flex-wrap:wrap;
+  }
+  .brand{
+    font-family:var(--mono); font-weight:600; font-size:14.5px;
+    letter-spacing:.02em;
+    text-decoration:none;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .sq{
+    width:22px; height:22px; border-radius:5px;
+    background:var(--ink); color:var(--amber);
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:10.5px; font-weight:700;
+  }
+  nav.links{ display:flex; gap:26px; flex-wrap:wrap; }
+  nav.links a{
+    font-family:var(--mono); font-size:13px; text-decoration:none;
+    color:var(--slate); letter-spacing:.02em;
+    padding-bottom:2px; border-bottom:1px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  nav.links a:hover{ color:var(--ink); border-color:var(--ink); }
+  .btn-resume{
+    font-family:var(--mono); font-size:12.5px; text-decoration:none;
+    background:var(--ink); color:var(--paper);
+    padding:8px 14px; border-radius:7px; letter-spacing:.02em;
+    transition:background .15s, transform .15s;
+  }
+  .btn-resume:hover{ background:var(--teal); transform:translateY(-1px); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 72px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+    align-items:center;
+    justify-items:center;
+    text-align:center;
+  }
+  .hero-copy{
+    max-width:760px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.1rem);
+    line-height:1.02;
+    margin:18px 0 20px;
+  }
+  .hero .tagline{
+    font-size:1.1rem;
+    color:var(--slate);
+    max-width:46ch;
+    margin-bottom:32px;
+  }
+  .hero .tagline strong{ color:var(--ink); font-weight:600; }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .btn{
+    font-family:var(--mono); font-size:13.5px; letter-spacing:.02em;
+    padding:13px 22px; border-radius:8px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s, box-shadow .15s;
+    border:1px solid transparent;
+  }
+  .btn-primary{ background:var(--amber); color:var(--ink); font-weight:600; }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(230,169,59,.35); }
+  .btn-outline{ border-color:var(--ink); color:var(--ink); }
+  .btn-outline:hover{ transform:translateY(-2px); background:var(--ink); color:var(--paper); }
+
+  /* ---------- Extraction demo ---------- */
+  .demo{
+    background:var(--panel);
+    border-radius:14px;
+    padding:18px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    box-shadow:0 20px 50px -20px rgba(27,31,35,.45);
+  }
+  .demo-pane{
+    background:#1a1d21;
+    border:1px solid var(--line-dark);
+    border-radius:10px;
+    padding:14px 14px 16px;
+    min-height:230px;
+    display:flex; flex-direction:column;
+  }
+  .demo-pane .fname{
+    font-family:var(--mono); font-size:11px; color:#8b93a0;
+    margin-bottom:12px; letter-spacing:.03em;
+    display:flex; align-items:center; gap:6px;
+  }
+  .demo-pane .fname::before{
+    content:''; width:7px; height:7px; border-radius:50%;
+    background:#565c64; display:inline-block;
+  }
+  .raw pre{
+    margin:0; font-family:var(--mono); font-size:12.5px; color:#c7cdd6;
+    white-space:pre-wrap; line-height:1.75; flex:1;
+  }
+  .raw .cursor{
+    display:inline-block; width:7px; height:14px; background:var(--amber);
+    vertical-align:middle; animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .fields{ display:flex; flex-direction:column; gap:9px; flex:1; justify-content:flex-start; }
+  .field{
+    display:grid; grid-template-columns:84px 1fr; gap:10px;
+    font-family:var(--mono); font-size:12px;
+    opacity:0; transform:translateY(6px);
+    transition:opacity .45s ease, transform .45s ease;
+    padding:6px 8px; border-radius:6px;
+    border-left:2px solid transparent;
+  }
+  .field.show{
+    opacity:1; transform:translateY(0);
+    background:rgba(255,201,74,.07);
+    border-left-color:var(--amber);
+  }
+  .field .k{ color:#8b93a0; }
+  .field .v{ color:#f1eee6; font-weight:500; }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:84px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{ margin-bottom:44px; }
+  .section-head .eyebrow{ margin-bottom:14px; }
+  .section-head h2{ font-size:clamp(1.7rem, 3vw, 2.2rem); }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- About / stats ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:start; }
+  .about-copy p{ color:var(--slate); font-size:1.02rem; max-width:56ch; }
+  .about-copy p + p{ margin-top:14px; }
+  .stats{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .stat{ background:var(--paper); padding:22px 20px; }
+  .stat .num{ font-family:var(--serif); font-size:2.1rem; font-weight:600; color:var(--ink); }
+  .stat .lbl{ font-family:var(--mono); font-size:11.5px; color:var(--slate); letter-spacing:.03em; margin-top:4px; }
+
+  /* ---------- Changelog / experience ---------- */
+  .changelog{ display:flex; flex-direction:column; gap:0; }
+  .release{
+    display:grid; grid-template-columns:150px 1fr; gap:32px;
+    padding:32px 0; border-top:1px solid var(--line);
+  }
+  .release:first-child{ border-top:none; }
+  .release-meta{ font-family:var(--mono); }
+  .release-meta .ver{ font-size:1.3rem; font-weight:700; color:var(--ink); display:block; }
+  .release-meta .tag{
+    display:inline-block; margin-top:8px; font-size:10.5px; letter-spacing:.05em;
+    background:var(--teal); color:var(--paper); padding:3px 8px; border-radius:5px;
+  }
+  .release-meta .when{ display:block; margin-top:10px; font-size:12px; color:var(--slate); }
+  .release-body h3{ font-size:1.2rem; margin-bottom:2px; }
+  .release-body .org{ font-family:var(--mono); font-size:12.5px; color:var(--slate); margin-bottom:16px; display:block; }
+  .diff{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .diff li{ font-size:14.5px; padding-left:26px; position:relative; color:var(--ink); }
+  .diff li .mk{
+    position:absolute; left:0; top:0; font-family:var(--mono); font-weight:700;
+  }
+  .diff li.add .mk{ color:var(--teal); }
+  .diff li.chg .mk{ color:var(--amber-deep); }
+
+  /* ---------- Projects ---------- */
+  .proj-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .proj-card{
+    border:1px solid var(--line); border-radius:12px; padding:24px;
+    background:var(--paper); transition:border-color .2s, transform .2s, box-shadow .2s;
+    display:flex; flex-direction:column; height:100%;
+  }
+  .proj-card:hover{ border-color:var(--ink); transform:translateY(-4px); box-shadow:0 16px 32px -18px rgba(27,31,35,.3); }
+  .proj-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .proj-top .gh{ font-family:var(--mono); font-size:11px; color:var(--slate); }
+  .proj-card h3{ font-size:1.15rem; margin-bottom:8px; }
+  .proj-card p{ color:var(--slate); font-size:13.8px; flex:1; margin:0 0 16px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tags span{
+    font-family:var(--mono); font-size:10.8px; color:var(--ink);
+    background:var(--paper-alt); border:1px solid var(--line);
+    padding:4px 8px; border-radius:5px;
+  }
+  .proj-link{ margin-top:16px; font-family:var(--mono); font-size:12px; text-decoration:none; color:var(--teal); }
+  .proj-link:hover{ text-decoration:underline; }
+
+  /* ---------- Skills ---------- */
+  .skill-row{ display:grid; grid-template-columns:190px 1fr; gap:20px; padding:18px 0; border-top:1px solid var(--line); align-items:center; }
+  .skill-row:first-child{ border-top:none; }
+  .skill-row .k{ font-family:var(--mono); font-size:12px; color:var(--slate); letter-spacing:.04em; }
+  .skill-row .v{ display:flex; flex-wrap:wrap; gap:8px; }
+  .skill-row .v span{
+    font-family:var(--mono); font-size:12.5px; padding:5px 10px; border-radius:6px;
+    background:var(--paper); border:1px solid var(--line);
+  }
+
+  /* ---------- Education ---------- */
+  .edu{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .edu-card{ border:1px solid var(--line); border-radius:12px; padding:24px; }
+  .edu-card h3{ font-size:1.05rem; margin-bottom:6px; }
+  .edu-card .meta{ font-family:var(--mono); font-size:12px; color:var(--slate); }
+  .edu-card .cgpa{ margin-top:14px; font-family:var(--mono); font-size:12.5px; color:var(--teal); }
+
+  /* ---------- Footer / contact ---------- */
+  footer{ padding:72px 0 48px; }
+  .contact-head{ margin-bottom:36px; }
+  .contact-head h2{ font-size:clamp(2rem, 4vw, 2.8rem); max-width:14ch; }
+  .contact-links{ display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .contact-links a{
+    font-family:var(--mono); font-size:13.5px; text-decoration:none;
+    border:1px solid var(--line); border-radius:8px; padding:11px 18px;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:border-color .15s, background .15s;
+  }
+  .contact-links a:hover{ border-color:var(--ink); background:var(--paper-alt); }
+  .contact-links img{
+    width:18px; height:18px; object-fit:contain; display:block;
+    flex:none;
+  }
+  .contact-links .link-label{ display:inline-block; }
+  .foot-bottom{
+    margin-top:56px; padding-top:24px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:var(--mono); font-size:11.5px; color:var(--slate);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:880px){
+    .hero-grid{ grid-template-columns:1fr; gap:40px; }
+    .about-grid{ grid-template-columns:1fr; }
+    .stats{ grid-template-columns:1fr 1fr; }
+    .proj-grid{ grid-template-columns:1fr; }
+    .release{ grid-template-columns:1fr; gap:10px; }
+    .edu{ grid-template-columns:1fr; }
+    .skill-row{ grid-template-columns:1fr; gap:8px; }
+    .demo{ grid-template-columns:1fr; }
+    nav.links{ order:3; width:100%; justify-content:flex-start; gap:18px; }
+  }
+  @media (max-width:520px){
+    .hero{ padding:64px 0 48px; }
+    section{ padding:60px 0; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <img class="mypic" src="Images/MyPhoto4.JPG" alt="My Photo">
-                <div class="name">ARYMAN SRIVASTAVA</div>
-            </div>
-        </header>
-        <div class="subheader-container">
-            <p class="subheader typing">Software Engineer</p>
-            <button class="cta-button">
-                <a href="connect.html" target="_blank" style="text-decoration: none; color: inherit;">
-                    Get in Touch
-                </a>
-            </button>
-        </div>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#" class="brand"><span class="sq">AS</span> aryman srivastava</a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn-resume" href="Aryman_Srivastava_Resume.pdf" download>Résumé ↓</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="dot"></span> open to new opportunities</span>
+      <h1>Aryman Srivastava</h1>
+      <p class="tagline">SDE II building <strong>multi-agent orchestration systems, RAG pipelines, and the data &amp; auth infrastructure</strong> that keep them reliable at scale.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:shivisrivastava360@gmail.com">Get in touch →</a>
+        <a class="btn btn-outline" href="Aryman_Srivastava_Resume.pdf" download>Download résumé</a>
+      </div>
     </div>
-    <div class="container3">
-        <div class="subheader-container">
-            <header>ABOUT ME</header>
-            <p class="subheader typing" style="white-space: normal; word-break: break-word; padding-left: 10%;">Hi, I'm a passionate Software Engineer who graduated in 2024, specializing in Artificial Intelligence and Machine Learning. I have experience in developing AI-driven solutions, machine learning models, and web applications. My focus is on building intelligent systems that enhance user experiences and drive innovation.</p>
-        </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="section-head">
+        <span class="eyebrow">01 · About</span>
+        <h2>I build systems that turn complexity into clarity.</h2>
+      </div>
+      <div class="about-copy">
+        <p>At NatWest Group in Gurugram, India, I work as an SDE II on the orchestration layer for a multi-agent system built on top of our RAG pipeline, along with the data engineering (MongoDB), messaging (Kafka), and authentication (JWKS, IAM) that keep it reliable in production.</p>
+        <p>Much of that work centers on software design patterns that keep the orchestration layer extensible, and on tools like Agent SDK and Opik for building and monitoring agentic workflows. Beyond individual delivery, this has grown to include supporting — and at times leading — teammates through their own work on these projects.</p>
+        <p>That foundation traces back to IIIT Delhi, where a B.Tech in Electronics &amp; Communication Engineering (2024) followed research stints in generative AI and adversarial machine learning. The common thread throughout has been building things that measurably save someone time, not just demos.</p>
+      </div>
     </div>
-    <div class="container2">
-        <header>PROJECTS</header>
-        <div class="subheader-container">
-            <p class="subheader typing">Explore my latest work</p>
-            <button class="cta-button">
-                <a href="https://github.com/Aryman-Srivastava" target="_blank" style="text-decoration: none; color: inherit;">
-                    View Projects
-                </a>
-            </button>
-        </div>
+    <div class="stats reveal">
+      <div class="stat"><div class="num">90%+</div><div class="lbl">DOCUMENT EXTRACTION ACCURACY</div></div>
+      <div class="stat"><div class="num">50%</div><div class="lbl">FASTER ONBOARDING VIA RAG</div></div>
+      <div class="stat"><div class="num">20+</div><div class="lbl">TOOLS IN MCP CHATBOT</div></div>
+      <div class="stat"><div class="num">8.39</div><div class="lbl">CGPA · IIIT DELHI</div></div>
+      <div class="stat"><div class="num">2–5</div><div class="lbl">AGENTS ORCHESTRATED IN PROD</div></div>
+      <div class="stat"><div class="num">3–5</div><div class="lbl">ENGINEERS MENTORED / LED</div></div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            function typeEffect(element, speed) {
-                let text = element.innerHTML;
-                element.innerHTML = "";
-                let i = 0;
-                function type() {
-                    if (i < text.length) {
-                        element.innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(type, speed);
-                    }
-                }
-                type();
-            }
-    
-            let elements = document.querySelectorAll(".typing");
-            elements.forEach((el) => typeEffect(el, 100));
-        });
-    </script>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">02 · Experience</span>
+      <h2>Career, shipped like a changelog.</h2>
+    </div>
+
+    <div class="changelog">
+      <div class="release reveal">
+        <div class="release-meta">
+          <span class="ver">v4.0</span>
+          <span class="tag">current</span>
+          <span class="when">2026 — Present</span>
+        </div>
+        <div class="release-body">
+          <h3>Software Engineer II</h3>
+          <span class="org">NatWest Group · Gurugram, India</span>
+          <ul class="diff">
+            <li class="add"><span class="mk">+</span>Architected and shipped an orchestration service powering a multi-agent system of 2–5 collaborating agents on top of the RAG pipeline — letting them hand off context and work through multi-step queries end to end.</li>
+            <li class="chg"><span class="mk">~</span>Used an adapter/plugin architecture and strategy pattern so new agents plug in without touching core logic, backed by dependency injection and an event-driven (observer) design to keep the orchestration layer loosely coupled as the ecosystem grows.</li>
+            <li class="add"><span class="mk">+</span>Took ownership of the MongoDB source database, reshaping schema and access patterns to power new agent and marketplace use cases.</li>
+            <li class="add"><span class="mk">+</span>Rolled out Agent SDK and Opik across the stack, bringing full tracing and observability to multi-agent workflows in production.</li>
+            <li class="add"><span class="mk">+</span>Introduced Kafka to decouple services with event-driven messaging, boosting message throughput and replacing brittle point-to-point calls.</li>
+            <li class="add"><span class="mk">+</span>Locked down the platform with JWKS-based JWT authentication and IAM policies across every user-to-service and service-to-service call.</li>
+            <li class="chg"><span class="mk">~</span>Stepped into a leadership role — mentoring and steering a team of 3–5 engineers through delivery on high-visibility projects.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release reveal">
+        <div class="release-meta">
+          <span class="ver">v3.0</span>
+          <span class="when">Jul 2024 — 2026</span>
+        </div>
+        <div class="release-body">
+          <h3>Software Engineer</h3>
+          <span class="org">NatWest Group · Gurugram, India</span>
+          <ul class="diff">
+            <li class="add"><span class="mk">+</span>Shipped an AI agent on Amazon Textract that extracts key-value pairs and tables from uploaded documents at 90%+ accuracy.</li>
+            <li class="add"><span class="mk">+</span>Built a RAG-based onboarding chatbot wired to MongoDB, answering policy questions with source references and cutting onboarding time by 50%.</li>
+            <li class="add"><span class="mk">+</span>Engineered a general-purpose Spring Boot/Java backend for MongoDB, powering scalable data access for the AI Agents Marketplace.</li>
+            <li class="add"><span class="mk">+</span>Grew a modular MCP-based chatbot to 20+ tools, spanning general-purpose and domain-specific queries.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release reveal">
+        <div class="release-meta">
+          <span class="ver">v2.0</span>
+          <span class="when">Jan 2024 — May 2024</span>
+        </div>
+        <div class="release-body">
+          <h3>Software Engineer Intern</h3>
+          <span class="org">Advanced Multicore System Labs</span>
+          <ul class="diff">
+            <li class="chg"><span class="mk">~</span>Hardened an ML model against adversarial attacks by tuning accuracy trade-offs and encoding datasets.</li>
+            <li class="add"><span class="mk">+</span>Built a GEM5 application to control packet routing and channel selection based on user specifications.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release reveal">
+        <div class="release-meta">
+          <span class="ver">v1.0</span>
+          <span class="when">Jan 2023 — Jan 2024</span>
+        </div>
+        <div class="release-body">
+          <h3>Research Intern</h3>
+          <span class="org">CoSYS Labs</span>
+          <ul class="diff">
+            <li class="chg"><span class="mk">~</span>Cut generative model training time by 30% while simplifying the overall architecture.</li>
+            <li class="add"><span class="mk">+</span>Built a lightweight generative model that outperformed state-of-the-art baselines on key benchmarks.</li>
+            <li class="add"><span class="mk">+</span>Extended the generative model into image editing, adding advanced manipulation capabilities.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">03 · Projects</span>
+      <h2>Things I built to learn, then kept building.</h2>
+    </div>
+
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3 style="margin:0;">Image Generation Using AI</h3></div>
+        <span class="gh" style="margin-bottom:10px; display:block;">Jan 2023 – Jan 2024</span>
+        <p>A GAN built from two competing neural networks for high-quality image synthesis, trained and evaluated across multiple architectures.</p>
+        <div class="tags"><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>NumPy</span><span>Scikit-learn</span></div>
+        <a class="proj-link" href="https://github.com/Aryman-Srivastava/Image-Gen-Using-AI" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3 style="margin:0;">Desktop Voice Assistant — FRIDAY</h3></div>
+        <span class="gh" style="margin-bottom:10px; display:block;">Aug 2022 – Present</span>
+        <p>A speech-driven desktop assistant with everyday utility and web-navigation skills — an ongoing adaptation of the AI-Friday concept.</p>
+        <div class="tags"><span>Python</span><span>Speech Recognition</span><span>pyttsx3</span><span>googlesearch</span></div>
+        <a class="proj-link" href="https://github.com/Aryman-Srivastava/DesktopAssistant" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3 style="margin:0;">Gender Recognition from Voice</h3></div>
+        <span class="gh" style="margin-bottom:10px; display:block;">Oct 2022 – Dec 2022</span>
+        <p>Classifies gender from vocal attributes — shrillness, pitch, frequency — using voice-editing techniques to sharpen features, at 94%+ accuracy.</p>
+        <div class="tags"><span>Scikit-learn</span><span>Pandas</span><span>Seaborn</span><span>NumPy</span></div>
+        <a class="proj-link" href="https://github.com/Aryman-Srivastava/Machine-Learning-Project-Gender-Recognition-From-Voice" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">04 · Skills</span>
+      <h2>The stack, extracted.</h2>
+    </div>
+    <div class="reveal">
+      <div class="skill-row">
+        <span class="k">LANGUAGES</span>
+        <span class="v"><span>Python</span><span>Java</span><span>C++</span></span>
+      </div>
+      <div class="skill-row">
+        <span class="k">FRAMEWORKS &amp; APIs</span>
+        <span class="v"><span>Spring Boot</span><span>REST APIs</span><span>OpenAPI</span></span>
+      </div>
+      <div class="skill-row">
+        <span class="k">CLOUD &amp; DEVOPS</span>
+        <span class="v"><span>AWS CodeBuild</span><span>AWS CodePipeline</span><span>AWS CloudWatch</span><span>Docker</span></span>
+      </div>
+      <div class="skill-row">
+        <span class="k">DATA &amp; MESSAGING</span>
+        <span class="v"><span>MongoDB</span><span>MySQL</span><span>Kafka</span></span>
+      </div>
+      <div class="skill-row">
+        <span class="k">AI &amp; MONITORING</span>
+        <span class="v"><span>Agent SDK</span><span>Opik</span><span>Prometheus</span><span>Grafana</span></span>
+      </div>
+      <div class="skill-row">
+        <span class="k">AUTH &amp; TOOLING</span>
+        <span class="v"><span>JWKS</span><span>IAM</span><span>JWT</span><span>Git</span><span>GitHub</span><span>Linux</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">05 · Education</span>
+      <h2>Where it started.</h2>
+    </div>
+    <div class="edu reveal">
+      <div class="edu-card">
+        <h3>Indraprastha Institute of Information Technology, Delhi</h3>
+        <span class="meta">B.Tech, Electronics &amp; Communication Engineering · 2020 – 2024</span>
+        <div class="cgpa">CGPA 8.39 / 10</div>
+      </div>
+      <div class="edu-card">
+        <h3>Sumermal Jain Public School</h3>
+        <span class="meta">Delhi, India</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-head reveal">
+      <span class="eyebrow">06 · Contact</span>
+      <h2>Let's build something worth shipping.</h2>
+      <div class="contact-links">
+        <a href="mailto:shivisrivastava360@gmail.com" aria-label="Email Aryman Srivastava">
+          <img src="Images/mail.png" alt="Email icon" />
+          <span class="link-label">Email</span>
+        </a>
+        <a href="https://github.com/Aryman-Srivastava" target="_blank" rel="noopener" aria-label="Aryman's GitHub profile">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.57v-2.1c-3.34.73-4.04-1.59-4.04-1.59-.55-1.4-1.34-1.77-1.34-1.77-1.09-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.07 1.84 2.8 1.31 3.48.99.11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.9 0-1.3.46-2.38 1.22-3.22-.12-.3-.53-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.88.12 3.18.76.84 1.21 1.92 1.21 3.22 0 4.58-2.8 5.6-5.48 5.9.43.38.81 1.13.81 2.28v3.38c0 .31.21.69.83.57A12 12 0 0 0 12 .5Z"/></svg>
+          <span class="link-label">GitHub</span>
+        </a>
+        <a href="#" id="linkedinLink" target="_blank" rel="noopener" aria-label="Aryman's LinkedIn profile">
+          <img src="Images/linkedin.png" alt="LinkedIn icon" />
+          <span class="link-label">LinkedIn</span>
+        </a>
+        <a href="https://www.instagram.com/aryman_srivastava/" target="_blank" rel="noopener" aria-label="Aryman's Instagram profile">
+          <img src="Images/insta.png" alt="Instagram icon" />
+          <span class="link-label">Instagram</span>
+        </a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Aryman Srivastava</span>
+      <span>Built with HTML, CSS &amp; a bit of JS — hosted on GitHub Pages</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // TODO: paste your real LinkedIn profile URL below
+  document.getElementById('linkedinLink').href = "https://www.linkedin.com/in/shivi-srivastava-m/";
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- Scroll reveal ---------------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ---------------- Hero extraction demo ---------------- */
+  var rawLines = [
+    "aryman srivastava — software engineer ii",
+    "natwest group, gurugram, india",
+    "orchestration service / multi-agent rag",
+    "design patterns · mongodb · kafka",
+    "agent sdk workflows + opik monitoring",
+    "jwks + iam auth, service-to-service"
+  ];
+  var rawEl = document.getElementById('rawText');
+  var fieldEls = document.querySelectorAll('#fields .field');
+
+  function resetDemo(){
+    rawEl.innerHTML = '<span class="cursor"></span>';
+    fieldEls.forEach(function(f){ f.classList.remove('show'); });
+  }
+
+  function runDemo(){
+    if(reduceMotion){
+      rawEl.textContent = rawLines.join('\n');
+      fieldEls.forEach(function(f){ f.classList.add('show'); });
+      return;
+    }
+    resetDemo();
+    var lineIndex = 0, charIndex = 0, typed = "";
+
+    function typeNext(){
+      if(lineIndex >= rawLines.length){
+        setTimeout(function(){ resetDemo(); setTimeout(runDemo, 500); }, 2600);
+        return;
+      }
+      var line = rawLines[lineIndex];
+      if(charIndex <= line.length){
+        typed = rawLines.slice(0, lineIndex).join('\n') + (lineIndex > 0 ? '\n' : '') + line.slice(0, charIndex);
+        rawEl.innerHTML = typed.replace(/</g,'&lt;') + '<span class="cursor"></span>';
+        charIndex++;
+        setTimeout(typeNext, 18 + Math.random()*22);
+      } else {
+        if(fieldEls[lineIndex]) fieldEls[lineIndex].classList.add('show');
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeNext, 260);
+      }
+    }
+    typeNext();
+  }
+
+  runDemo();
+</script>
+
 </body>
 </html>
