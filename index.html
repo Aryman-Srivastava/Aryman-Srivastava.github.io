@@ -133,16 +133,8 @@
   }
   .hero-grid{
     display:grid;
-    grid-template-columns:1fr;
-    gap:28px;
-    align-items:center;
-    justify-items:center;
-    text-align:center;
-  }
-  .hero-copy{
-    max-width:760px;
-    display:flex;
-    flex-direction:column;
+    grid-template-columns:1.05fr .95fr;
+    gap:56px;
     align-items:center;
   }
   .hero h1{
@@ -157,7 +149,7 @@
     margin-bottom:32px;
   }
   .hero .tagline strong{ color:var(--ink); font-weight:600; }
-  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
   .btn{
     font-family:var(--mono); font-size:13.5px; letter-spacing:.02em;
     padding:13px 22px; border-radius:8px; text-decoration:none;
@@ -278,7 +270,8 @@
   .proj-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
   .proj-top .gh{ font-family:var(--mono); font-size:11px; color:var(--slate); }
   .proj-card h3{ font-size:1.15rem; margin-bottom:8px; }
-  .proj-card p{ color:var(--slate); font-size:13.8px; flex:1; margin:0 0 16px; }
+  .proj-card p{ color:var(--slate); font-size:13.8px; margin:0 0 8px; }
+  .proj-card p:last-of-type{ flex:1; margin-bottom:16px; }
   .tags{ display:flex; flex-wrap:wrap; gap:6px; }
   .tags span{
     font-family:var(--mono); font-size:10.8px; color:var(--ink);
@@ -289,7 +282,7 @@
   .proj-link:hover{ text-decoration:underline; }
 
   /* ---------- Skills ---------- */
-  .skill-row{ display:grid; grid-template-columns:190px 1fr; gap:20px; padding:18px 0; border-top:1px solid var(--line); align-items:center; }
+  .skill-row{ display:grid; grid-template-columns:170px 1fr; gap:20px; padding:18px 0; border-top:1px solid var(--line); align-items:center; }
   .skill-row:first-child{ border-top:none; }
   .skill-row .k{ font-family:var(--mono); font-size:12px; color:var(--slate); letter-spacing:.04em; }
   .skill-row .v{ display:flex; flex-wrap:wrap; gap:8px; }
@@ -317,11 +310,6 @@
     transition:border-color .15s, background .15s;
   }
   .contact-links a:hover{ border-color:var(--ink); background:var(--paper-alt); }
-  .contact-links img{
-    width:18px; height:18px; object-fit:contain; display:block;
-    flex:none;
-  }
-  .contact-links .link-label{ display:inline-block; }
   .foot-bottom{
     margin-top:56px; padding-top:24px; border-top:1px solid var(--line);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
@@ -373,13 +361,31 @@
 
 <section class="hero">
   <div class="wrap hero-grid">
-    <div class="hero-copy">
+    <div>
       <span class="eyebrow"><span class="dot"></span> open to new opportunities</span>
       <h1>Aryman Srivastava</h1>
       <p class="tagline">SDE II building <strong>multi-agent orchestration systems, RAG pipelines, and the data &amp; auth infrastructure</strong> that keep them reliable at scale.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="mailto:shivisrivastava360@gmail.com">Get in touch →</a>
         <a class="btn btn-outline" href="Aryman_Srivastava_Resume.pdf" download>Download résumé</a>
+      </div>
+    </div>
+
+    <div class="demo" aria-hidden="true">
+      <div class="demo-pane raw">
+        <span class="fname">raw_input.txt</span>
+        <pre id="rawText"></pre>
+      </div>
+      <div class="demo-pane">
+        <span class="fname">extracted.json</span>
+        <div class="fields" id="fields">
+          <div class="field"><span class="k">name</span><span class="v">Aryman Srivastava</span></div>
+          <div class="field"><span class="k">role</span><span class="v">Software Engineer II</span></div>
+          <div class="field"><span class="k">company</span><span class="v">NatWest Group</span></div>
+          <div class="field"><span class="k">focus</span><span class="v">Multi-Agent Orchestration · RAG</span></div>
+          <div class="field"><span class="k">stack</span><span class="v">Kafka · MongoDB · Agent SDK</span></div>
+          <div class="field"><span class="k">auth</span><span class="v">JWKS + IAM, service-to-service</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -427,12 +433,10 @@
           <h3>Software Engineer II</h3>
           <span class="org">NatWest Group · Gurugram, India</span>
           <ul class="diff">
-            <li class="add"><span class="mk">+</span>Architected and shipped an orchestration service powering a multi-agent system of 2–5 collaborating agents on top of the RAG pipeline — letting them hand off context and work through multi-step queries end to end.</li>
-            <li class="chg"><span class="mk">~</span>Used an adapter/plugin architecture and strategy pattern so new agents plug in without touching core logic, backed by dependency injection and an event-driven (observer) design to keep the orchestration layer loosely coupled as the ecosystem grows.</li>
+            <li class="add"><span class="mk">+</span>Architected and shipped an orchestration service powering a multi-agent system of 2–5 collaborating agents on top of the RAG pipeline — using an adapter/plugin architecture, strategy pattern, dependency injection, and an event-driven (observer) design to keep it modular and let agents hand off context across multi-step queries.</li>
             <li class="add"><span class="mk">+</span>Took ownership of the MongoDB source database, reshaping schema and access patterns to power new agent and marketplace use cases.</li>
             <li class="add"><span class="mk">+</span>Rolled out Agent SDK and Opik across the stack, bringing full tracing and observability to multi-agent workflows in production.</li>
-            <li class="add"><span class="mk">+</span>Introduced Kafka to decouple services with event-driven messaging, boosting message throughput and replacing brittle point-to-point calls.</li>
-            <li class="add"><span class="mk">+</span>Locked down the platform with JWKS-based JWT authentication and IAM policies across every user-to-service and service-to-service call.</li>
+            <li class="add"><span class="mk">+</span>Introduced Kafka for event-driven messaging and locked down the platform with JWKS-based JWT authentication and IAM policies across every service-to-service call — boosting throughput and tightening access control.</li>
             <li class="chg"><span class="mk">~</span>Stepped into a leadership role — mentoring and steering a team of 3–5 engineers through delivery on high-visibility projects.</li>
           </ul>
         </div>
@@ -449,6 +453,7 @@
           <ul class="diff">
             <li class="add"><span class="mk">+</span>Shipped an AI agent on Amazon Textract that extracts key-value pairs and tables from uploaded documents at 90%+ accuracy.</li>
             <li class="add"><span class="mk">+</span>Built a RAG-based onboarding chatbot wired to MongoDB, answering policy questions with source references and cutting onboarding time by 50%.</li>
+            <li class="add"><span class="mk">+</span>Tuned retrieval (chunk size/overlap, embedding model selection, hybrid keyword+vector search, reranking) and built an evaluation harness (automated metrics + LLM-as-judge scoring) to lift answer relevancy and cut hallucinations.</li>
             <li class="add"><span class="mk">+</span>Engineered a general-purpose Spring Boot/Java backend for MongoDB, powering scalable data access for the AI Agents Marketplace.</li>
             <li class="add"><span class="mk">+</span>Grew a modular MCP-based chatbot to 20+ tools, spanning general-purpose and domain-specific queries.</li>
           </ul>
@@ -458,21 +463,6 @@
       <div class="release reveal">
         <div class="release-meta">
           <span class="ver">v2.0</span>
-          <span class="when">Jan 2024 — May 2024</span>
-        </div>
-        <div class="release-body">
-          <h3>Software Engineer Intern</h3>
-          <span class="org">Advanced Multicore System Labs</span>
-          <ul class="diff">
-            <li class="chg"><span class="mk">~</span>Hardened an ML model against adversarial attacks by tuning accuracy trade-offs and encoding datasets.</li>
-            <li class="add"><span class="mk">+</span>Built a GEM5 application to control packet routing and channel selection based on user specifications.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="release reveal">
-        <div class="release-meta">
-          <span class="ver">v1.0</span>
           <span class="when">Jan 2023 — Jan 2024</span>
         </div>
         <div class="release-body">
@@ -480,8 +470,7 @@
           <span class="org">CoSYS Labs</span>
           <ul class="diff">
             <li class="chg"><span class="mk">~</span>Cut generative model training time by 30% while simplifying the overall architecture.</li>
-            <li class="add"><span class="mk">+</span>Built a lightweight generative model that outperformed state-of-the-art baselines on key benchmarks.</li>
-            <li class="add"><span class="mk">+</span>Extended the generative model into image editing, adding advanced manipulation capabilities.</li>
+            <li class="add"><span class="mk">+</span>Built a lightweight generative model that outperformed state-of-the-art baselines and extended it into image editing with advanced manipulation capabilities.</li>
           </ul>
         </div>
       </div>
@@ -501,24 +490,27 @@
         <div class="proj-top"><h3 style="margin:0;">Image Generation Using AI</h3></div>
         <span class="gh" style="margin-bottom:10px; display:block;">Jan 2023 – Jan 2024</span>
         <p>A GAN built from two competing neural networks for high-quality image synthesis, trained and evaluated across multiple architectures.</p>
+        <p>Trained the generator-discriminator pair on facial image data to synthesize realistic human faces.</p>
         <div class="tags"><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>NumPy</span><span>Scikit-learn</span></div>
-        <a class="proj-link" href="https://github.com/Aryman-Srivastava/Image-Gen-Using-AI" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="proj-link" href="https://github.com/Aryman-Srivastava" target="_blank" rel="noopener">View on GitHub →</a>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-top"><h3 style="margin:0;">Desktop Voice Assistant — FRIDAY</h3></div>
         <span class="gh" style="margin-bottom:10px; display:block;">Aug 2022 – Present</span>
         <p>A speech-driven desktop assistant with everyday utility and web-navigation skills — an ongoing adaptation of the AI-Friday concept.</p>
+        <p>Extended beyond search and navigation to answer general voice queries and launch apps and files hands-free.</p>
         <div class="tags"><span>Python</span><span>Speech Recognition</span><span>pyttsx3</span><span>googlesearch</span></div>
-        <a class="proj-link" href="https://github.com/Aryman-Srivastava/DesktopAssistant" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="proj-link" href="https://github.com/Aryman-Srivastava" target="_blank" rel="noopener">View on GitHub →</a>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-top"><h3 style="margin:0;">Gender Recognition from Voice</h3></div>
         <span class="gh" style="margin-bottom:10px; display:block;">Oct 2022 – Dec 2022</span>
         <p>Classifies gender from vocal attributes — shrillness, pitch, frequency — using voice-editing techniques to sharpen features, at 94%+ accuracy.</p>
+        <p>Trained and evaluated on a public voice dataset to validate generalization beyond the training set.</p>
         <div class="tags"><span>Scikit-learn</span><span>Pandas</span><span>Seaborn</span><span>NumPy</span></div>
-        <a class="proj-link" href="https://github.com/Aryman-Srivastava/Machine-Learning-Project-Gender-Recognition-From-Voice" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="proj-link" href="https://github.com/Aryman-Srivastava" target="_blank" rel="noopener">View on GitHub →</a>
       </div>
     </div>
   </div>
@@ -532,23 +524,19 @@
     </div>
     <div class="reveal">
       <div class="skill-row">
-        <span class="k">LANGUAGES</span>
-        <span class="v"><span>Python</span><span>Java</span><span>C++</span></span>
-      </div>
-      <div class="skill-row">
-        <span class="k">FRAMEWORKS &amp; APIs</span>
-        <span class="v"><span>Spring Boot</span><span>REST APIs</span><span>OpenAPI</span></span>
-      </div>
-      <div class="skill-row">
-        <span class="k">CLOUD &amp; DEVOPS</span>
-        <span class="v"><span>AWS CodeBuild</span><span>AWS CodePipeline</span><span>AWS CloudWatch</span><span>Docker</span></span>
+        <span class="k">LANGUAGES &amp; FRAMEWORKS</span>
+        <span class="v"><span>Python</span><span>Java</span><span>C++</span><span>Spring Boot</span><span>REST APIs</span><span>OpenAPI</span></span>
       </div>
       <div class="skill-row">
         <span class="k">DATA &amp; MESSAGING</span>
         <span class="v"><span>MongoDB</span><span>MySQL</span><span>Kafka</span></span>
       </div>
       <div class="skill-row">
-        <span class="k">AI &amp; MONITORING</span>
+        <span class="k">CLOUD &amp; DEVOPS</span>
+        <span class="v"><span>AWS CodeBuild</span><span>AWS CodePipeline</span><span>AWS CloudWatch</span><span>Docker</span></span>
+      </div>
+      <div class="skill-row">
+        <span class="k">AI &amp; OBSERVABILITY</span>
         <span class="v"><span>Agent SDK</span><span>Opik</span><span>Prometheus</span><span>Grafana</span></span>
       </div>
       <div class="skill-row">
@@ -585,22 +573,10 @@
       <span class="eyebrow">06 · Contact</span>
       <h2>Let's build something worth shipping.</h2>
       <div class="contact-links">
-        <a href="mailto:shivisrivastava360@gmail.com" aria-label="Email Aryman Srivastava">
-          <img src="Images/mail.png" alt="Email icon" />
-          <span class="link-label">Email</span>
-        </a>
-        <a href="https://github.com/Aryman-Srivastava" target="_blank" rel="noopener" aria-label="Aryman's GitHub profile">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.57v-2.1c-3.34.73-4.04-1.59-4.04-1.59-.55-1.4-1.34-1.77-1.34-1.77-1.09-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.07 1.84 2.8 1.31 3.48.99.11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.9 0-1.3.46-2.38 1.22-3.22-.12-.3-.53-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.88.12 3.18.76.84 1.21 1.92 1.21 3.22 0 4.58-2.8 5.6-5.48 5.9.43.38.81 1.13.81 2.28v3.38c0 .31.21.69.83.57A12 12 0 0 0 12 .5Z"/></svg>
-          <span class="link-label">GitHub</span>
-        </a>
-        <a href="#" id="linkedinLink" target="_blank" rel="noopener" aria-label="Aryman's LinkedIn profile">
-          <img src="Images/linkedin.png" alt="LinkedIn icon" />
-          <span class="link-label">LinkedIn</span>
-        </a>
-        <a href="https://www.instagram.com/aryman_srivastava/" target="_blank" rel="noopener" aria-label="Aryman's Instagram profile">
-          <img src="Images/insta.png" alt="Instagram icon" />
-          <span class="link-label">Instagram</span>
-        </a>
+        <a href="mailto:shivisrivastava360@gmail.com">✉ shivisrivastava360@gmail.com</a>
+        <a href="tel:+917042682288">☎ +91 70426 82288</a>
+        <a href="https://github.com/Aryman-Srivastava" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="#" id="linkedinLink" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
     <div class="foot-bottom">
